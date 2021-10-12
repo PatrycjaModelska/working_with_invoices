@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: Poduszka
+  value: 100.00
+  split_payments: true
+
+two:
+  number: Świeczka
+  value: 17.99
+  split_payments: true

@@ -1,0 +1,59 @@
+<%= form_with(model: invoice) do |form| %>
+  <% if invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+        <% invoice.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "type" %>
+    <%= form.collection_select(:type_id, @types, :id, :kind, {:include_blank =>"Wybierz"}) %>
+  </div>
+
+  <script>
+    $("#invoice_type_id").change(function() {
+      // działająca opcja
+      // if ($(this).val() == "2") 
+      // druga opcja, warunek czytelniejszy dla użytkownika
+      if ($("#invoice_type_id option:selected").text() == "Paragon"){
+        // trzeba używać .prop zamiast .attr
+        $("#invoice_split_payments").prop("checked", false);
+        $('#invoice_split_payments').hide();
+        $('.field').find("label[for=invoice_split_payments]").hide();
+      } else {
+        $('#invoice_split_payments').show();
+        $('.field').find("label[for=invoice_split_payments]").show();
+
+      }
+    });
+    $("#invoice_type_id").trigger("change");
+  </script>
+
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number%>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.number_field :value, step: 0.01, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :split_payments %>
+    <%= form.check_box :split_payments %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+
+<% end %>
