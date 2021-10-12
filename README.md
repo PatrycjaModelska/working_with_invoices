@@ -16,20 +16,19 @@ The whole logic of such a procedure is in the file: [_form.html.er](/app/views/i
 
   <script>
     $("#invoice_type_id").change(function() {
-      // działająca opcja
-      // if ($(this).val() == "2") 
-      // druga opcja, warunek czytelniejszy dla użytkownika
+
       if ($("#invoice_type_id option:selected").text() == "Paragon"){
-        // trzeba używać .prop zamiast .attr
         $("#invoice_split_payments").prop("checked", false);
         $('#invoice_split_payments').hide();
         $('.field').find("label[for=invoice_split_payments]").hide();
+
       } else {
         $('#invoice_split_payments').show();
         $('.field').find("label[for=invoice_split_payments]").show();
-
       }
     });
     $("#invoice_type_id").trigger("change");
   </script>l
 ```
+If the user selects the type named "Receipt", jQuery will uncheck the checkbox and hide it.
+I don't recommend using .attr() method. [Here](https://api.jquery.com/prop/) is why.
