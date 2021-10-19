@@ -15,12 +15,12 @@ class InvoicesTest < ApplicationSystemTestCase
 
     click_on "New Invoice"
 
-    # opcja z select pozwala wybierać po nazwie 
+    find('#invoice_type_id').find(:option, 'Paragon').select_option
+    # different methods
     # find('#invoice_type_id').find(:xpath, 'option[2]').select_option
-    page.select('Paragon', from: 'invoice_type_id')
+    # page.select('Paragon', from: 'invoice_type_id')
 
     fill_in "Number", with: @invoice.number
-
     fill_in "Value", with: @invoice.value
 
     assert has_no_field?('invoice_split_paymanet')
